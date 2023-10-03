@@ -1,17 +1,14 @@
-package com.example.testcases;
+Dependency Required:-
+testImplementation 'org.mockito:mockito-inline:3.4.6'
+testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+•	The class for which we are writing the test cases(CarService), we will annotate it  with @InjectMocks 
+•	The DAO and Services whose methods we want to mock, we will annotated with @Mock
+  @Mock
+ProductDao productDao;
+@InjectMocks
+ProductService productService;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoSettings;
-import rest.dto.UserDto;
-import rest.entity.User;
-import rest.repository.UserRepository;
-import rest.service.UserService;
-
-import static org.mockito.ArgumentMatchers.any;
 
 @MockitoSettings
 public class UserServiceImplTest {
@@ -20,15 +17,18 @@ public class UserServiceImplTest {
 
     @InjectMocks
     UserService userService;
+
 //Mockito.when
     @Test
     public void getAllUserInfoTest(){
         Mockito.when(userRepository.saveAll(any())).thenReturn(2);
         Mockito.when(userRepository.save(any())).thenReturn(3);
+        Mockito.when(userRepository.save(any()).thenThrow();
         User  user=userService.updateUser("56789", "67890");
         Assertions.assertNotNull(user);
         
     }
+
     //Mockito.donothing and mockito.verify uses
     @Test
     public void deleteByIdTest(){
@@ -36,6 +36,7 @@ public class UserServiceImplTest {
         userService.deleteById("5678");
         Mockito.verify(userRepository).findByUserId("'6789");
     }
+
     //Mockito.doThrow
     @Test
     public void deleteByIdExceptionTest(){
