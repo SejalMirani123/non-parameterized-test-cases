@@ -1,0 +1,47 @@
+package com.example.testcases;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoSettings;
+import rest.dto.UserDto;
+import rest.entity.User;
+import rest.repository.UserRepository;
+import rest.service.UserService;
+
+import static org.mockito.ArgumentMatchers.any;
+
+@MockitoSettings
+public class UserServiceImplTest {
+    @Mock
+    UserRepository userRepository;
+
+    @InjectMocks
+    UserService userService;
+//Mockito.when
+    @Test
+    public void getAllUserInfoTest(){
+        Mockito.when(userRepository.saveAll(any())).thenReturn(2);
+        Mockito.when(userRepository.save(any())).thenReturn(3);
+        User  user=userService.updateUser("56789", "67890");
+        Assertions.assertNotNull(user);
+        
+    }
+    //Mockito.donothing and mockito.verify uses
+    @Test
+    public void deleteByIdTest(){
+       Mockito.doNothing().when(userRepository).findByUserId("6789");
+        userService.deleteById("5678");
+        Mockito.verify(userRepository).findByUserId("'6789");
+    }
+    //Mockito.doThrow
+    @Test
+    public void deleteByIdExceptionTest(){
+        Mockito.doThrow(new RuntimeException()).when(userRepository).findByUserId("6789");
+        userService.deleteById("5678");
+       
+    }
+    
+}
