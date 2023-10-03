@@ -23,7 +23,7 @@ public class UserServiceImplTest {
     public void getAllUserInfoTest(){
         Mockito.when(userRepository.saveAll(any())).thenReturn(2);
         Mockito.when(userRepository.save(any())).thenReturn(3);
-        Mockito.when(userRepository.save(any()).thenThrow();
+        Mockito.when(userRepository.save(any()).thenThrow(new NullPointerException());
         User  user=userService.updateUser("56789", "67890");
         Assertions.assertNotNull(user);
         
